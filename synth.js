@@ -58,13 +58,3 @@ function noteOff(note) {
   if (!synth) return;
   synth.triggerRelease(note);
 }
-
-// function setFilterCutoff(freq) {
-//   if (!filter) return;
-//   filter.frequency.rampTo(freq, 0.05);
-// }
-
-// function setFilterQ(q) {
-//   if (!filter) return;
-//   filter.Q.rampTo(q, 0.05);
-// }

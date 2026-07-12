@@ -27,7 +27,6 @@ const chordModeDict = {
     5: ["aug", "aug", "aug", "aug", "aug", "aug", "aug"]
 }
 
-const playModes = {}
 
 const AllNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 let keyNotes = [];
@@ -35,8 +34,6 @@ let key
 let octave = 3
 
 let noteStack = []
-// let lastChord = null
-// let playing = false
 
 
 function changeKey(newKey) {
@@ -46,13 +43,6 @@ function changeKey(newKey) {
         keyNotes.push(AllNotes[(key + offset) % 12])
     }
 }
-
-// function setChordMode(mode) {
-//     chordMode = mode
-//     // if (playing) {
-//     //     playChord(lastChord)
-//     // }
-// }
 
 function noteAdd(note, diff) {
     let ni = note + diff
@@ -75,17 +65,12 @@ function keyNoteAllNoteIndex(keyNoteIndex) {
 
 function getChordNotes(chordIndex, chordMode) {
     let out = []
-    // console.log("cm: " + chordMode)
-    // console.log("cmd: " + chordModeDict[chordMode])
-    // console.log("ctd: " + chordTypeDict[chordModeDict[chordMode]])
-    // console.log("ci: " + chordIndex)
     let chordModeString = chordModeDict[chordMode][chordIndex % 7]
     let octaveShift = 12 * Math.floor(chordIndex / 7)
     let rootOffset = keyNoteAllNoteIndex(chordIndex % 7) + octaveShift
     for (offset of chordTypeDict[chordModeString]) {
         out.push(noteAdd(key, rootOffset + offset))
     }
-    // console.log(out)
     return out
 }
 
@@ -103,8 +88,6 @@ function noteToValue(note) {
 }
 
 function getChordName(chordIndex, chordMode) {
-    // console.log("ci: " + chordIndex)
-    // console.log("cm: " + chordMode)
     let octaveShift = 12 * Math.floor(chordIndex / 7)
     let note = noteAdd(key, keyNoteAllNoteIndex(chordIndex % 7) + octaveShift)
     let chordModeString = chordModeDict[chordMode][chordIndex % 7]

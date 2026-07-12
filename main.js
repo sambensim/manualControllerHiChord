@@ -37,7 +37,6 @@ function pass() { return }
 function trigger(gpIndex) {
     let chordMode = controller.getStickSection(0, 1, 8, gpIndex)
     let chordIndex = controller.getStickSection(2, 3, 8, gpIndex)
-    // console.log("mode: " + chordMode + "\nindex: " + chordIndex)
     currentlyPlaying = getChordText(chordIndex, chordMode)
     if (chordIndex == -1) {
         unPressAll()
@@ -48,11 +47,8 @@ function trigger(gpIndex) {
 
 function playChord(chordIndex, chordMode, velocity = 1) {
     env.triggerAttackRelease(0.1)
-    // lastChord = chord
-    // playing = true
     notes = getChordNotes(chordIndex, chordMode)
     unPressAll()
-    // console.log(notes)
     for (note of notes) {
         recentDown.push([note, frameCount])
         noteStack.push(note)
@@ -78,40 +74,3 @@ async function startAudio() {
 }
 window.addEventListener("pointerdown", startAudio, { once: true });
 window.addEventListener("keydown", startAudio, { once: true });
-
-// window.addEventListener("gamepadbuttondown", (e) => {
-//     let chord = buttonChord[e.detail.button];
-//     if (chord == undefined || (chord < 0 || chord > 6) || (chord == "octDown" || chord == "octUp")) {
-//         return
-//     }
-//     playChord(chord, e.detail.value)
-// });
-
-// window.addEventListener("gamepadbuttonup", (e) => {
-//     console.log(e.detail.button)
-//     let chord = buttonChord[e.detail.button];
-//     if (chord == undefined || (chord < 0 || chord > 6)) {
-//         return
-//     } else if (chord == "octDown") {
-//         octave -= 1
-//         return
-//     } else if (chord == "octUp") {
-//         octave += 1
-//         return
-//     }
-//     // playing = false
-//     notes = getChordNotes(chord)
-//     for (note of notes) {
-//         recentUp.push(frameCount)
-//         noteOff(note);
-//     }
-// });
-
-// window.addEventListener("gamepadaxismove", (e) => {
-//     const [stickX, stickY] = e.detail.axes;
-//     let oct = vectorToOctant(stickX, stickY)
-//     // console.log(oct)
-//     if (oct != chordMode) {
-//         changeChordMode(oct)
-//     }
-// });
