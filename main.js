@@ -38,6 +38,8 @@ function on_classic({data}) {
     let {type, player, button, pressed} = data
     if (type === "button") {
         joystickState[player - 1][button] = pressed
+        gotit = JSON.stringify(joystickState)
+        debugDraw()
     }
     tryUpdate()
 }
