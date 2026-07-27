@@ -67,6 +67,7 @@ function getOctant(player) {
 }
 
 function tryUpdate() {
+    debugDraw()
     trigger()
     updateText(index)
 }

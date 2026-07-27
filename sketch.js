@@ -11,6 +11,12 @@ let cLeftFrame = -windowFrameCountSize
 function draw() {
     background(255)
     text(noteText, 50, 50);
+    debugDraw()()
+}
+
+function debugDraw() {
+    background(255)
+    text("OK I GOT IT", windowWidth/2, windowHeight/2);
 }
 
 let noteText = ""
