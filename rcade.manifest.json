@@ -1,0 +1,26 @@
+{
+  "$schema": "https://rcade.dev/manifest.schema.json",
+  "name": "contoller-chord",
+  "display_name": "ContollerChord",
+  "description": "trying to make a controller sound",
+  "visibility": "public",
+  "authors": [
+    {
+      "display_name": "Sam Simmons (and Sarah)"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "@rcade/input-classic",
+      "version": "1.0.0"
+    },
+    {
+      "name": "@rcade/input-spinners",
+      "version": "1.0.0"
+    },
+    {
+      "name": "@rcade/marquee",
+      "version": "1.0.0"
+    }
+  ]
+}

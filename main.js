@@ -1,6 +1,5 @@
 // main.js
 
-const marquee_channel = await PluginChannel.acquire("@rcade/marquee", "^1.0.0");
 window.RCadeInput = {
   register_classic: async (cb) => {
 	const classic_channel = await PluginChannel.acquire("@rcade/input-classic", "^1.0.0");
@@ -18,6 +17,56 @@ const PLAYMODES = ["CHORD", "STRUM", "LEAD", "ARP", "REPEAT"]
 const CONTROLLERINDEX = 1 //this is bad and lazy
 const TEMPOS = [10, 60, 80, 120, 180, 240]
 
+let initialState = {
+    left: false,
+    right: false,
+    up: false,
+    down: false,
+    a: false,
+    b: false
+}
+
+let joystickState = [{...initialState}, {...initialState}]
+
+window.RCadeInput.register_classic(on_classic)
+function on_classic({data}) {
+    let {type, player, button, pressed} = data
+    if (type == "button") {
+        joystickState[player - 1][button] = pressed
+        tryUpdate()
+    }
+}
+
+function getOctant(player) {
+    const {up, down, left, right} = joystickState[player]
+    const count = left + right + up + down;
+    switch (count) {
+        case 0:
+            return 0
+        case 1:
+            if (up) 
+                return 1;
+            if (right) 
+                return 3;
+            if (down) 
+                return 5;
+            if (left) 
+                return 7;
+        case 2:
+             if (up && right) 
+                return 2;
+            if (right && down) 
+                return 4;
+            if (down && left) 
+                return 6;
+            if (left && up) 
+                return 8;
+    }
+}
+
+function tryUpdate() {
+    trigger()
+}
 
 function mainLoop() {
     const leftTrigger = controller.getButtonValue(6, CONTROLLERINDEX) || 0;
@@ -28,6 +77,7 @@ function mainLoop() {
     }
     requestAnimationFrame(mainLoop);
 }
+
 let beatTriggered = []
 function beat() {
     // console.log(beatTriggered.length)
@@ -40,6 +90,19 @@ function beat() {
 }
 
 
+function trigger() {
+    let chordMode = controller.getOctant(0)-1
+    let chordIndex = controller.getOctant(1)-1
+    currentlyPlaying = getChordText(chordIndex, chordMode)
+    cChordNoteIndex = 0
+    if (chordIndex == -1) {
+        unPressAll()
+        beatTriggered.length = 0
+    } else {
+        playChord(chordIndex, chordMode)
+    }
+}
+
 
 beat()
 requestAnimationFrame(mainLoop);
@@ -51,7 +114,7 @@ const controller = new GamepadController({
     1: { onDown: (value, index) => playModeIndex = (playModeIndex + 1) % PLAYMODES.length, onUp: () => pass() }, //circle
     2: { onDown: (value, index) => tempoIndex = (tempoIndex + 1) % TEMPOS.length, onUp: () => pass() },//square
     // 3: //triangle
-    5: { onDown: (value, index) => trigger(index), onUp: () => pass() },
+    // 5: { onDown: (value, index) => trigger(index), onUp: () => pass() },
     12: { onDown: (value, index) => octave += 1, onUp: (value, index) => updateText(index) },
     13: { onDown: (value, index) => octave -= 1, onUp: (value, index) => updateText(index) },
     14: { onDown: (value, index) => changeKey(((key + 12) - 1) % 12), onUp: (value, index) => updateText(index) },
@@ -71,18 +134,18 @@ const controller = new GamepadController({
 
 function pass() { return }
 
-function trigger(gpIndex) {
-    let chordMode = controller.getStickSection(0, 1, 8, gpIndex)
-    let chordIndex = controller.getStickSection(2, 3, 8, gpIndex)
-    currentlyPlaying = getChordText(chordIndex, chordMode)
-    cChordNoteIndex = 0
-    if (chordIndex == -1) {
-        unPressAll()
-        beatTriggered.length = 0
-    } else {
-        playChord(chordIndex, chordMode)
-    }
-}
+// function trigger(gpIndex) {
+//     let chordMode = controller.getStickSection(0, 1, 8, gpIndex)
+//     let chordIndex = controller.getStickSection(2, 3, 8, gpIndex)
+//     currentlyPlaying = getChordText(chordIndex, chordMode)
+//     cChordNoteIndex = 0
+//     if (chordIndex == -1) {
+//         unPressAll()
+//         beatTriggered.length = 0
+//     } else {
+//         playChord(chordIndex, chordMode)
+//     }
+// }
 
 function playChord(chordIndex, chordMode, velocity = 1) {
     env.triggerAttackRelease(0.1)
