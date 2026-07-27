@@ -37,7 +37,7 @@ playChord(0, 0)
 function on_classic({data}) {
     let {type, player, button, pressed} = data
     if (type === "button") {
-        joystickState[player - 1][button] = pressed
+        joystickState[player - 1][button.toLowerCase()] = pressed 
         gotit = JSON.stringify(data);
         gotit += "\n" + JSON.stringify(joystickState)
         debugDraw()
