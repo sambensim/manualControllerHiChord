@@ -95,16 +95,17 @@ function beat() {
 
 
 function trigger() {
-    let chordMode = controller.getOctant(0)-1
-    let chordIndex = controller.getOctant(1)-1
-    currentlyPlaying = getChordText(chordIndex, chordMode)
-    cChordNoteIndex = 0
-    if (chordIndex == -1) {
-        unPressAll()
-        beatTriggered.length = 0
-    } else {
-        playChord(chordIndex, chordMode)
-    }
+    playChord(0, 0)
+    // let chordMode = controller.getOctant(0)-1
+    // let chordIndex = controller.getOctant(1)-1
+    // currentlyPlaying = getChordText(chordIndex, chordMode)
+    // cChordNoteIndex = 0
+    // if (chordIndex == -1) {
+    //     unPressAll()
+    //     beatTriggered.length = 0
+    // } else {
+    //     playChord(chordIndex, chordMode)
+    // }
 }
 
 
