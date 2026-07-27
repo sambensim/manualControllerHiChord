@@ -15,11 +15,11 @@ function draw() {
 
 let noteText = ""
 let currentlyPlaying = "none"
-function updateText(gpIndex) {
+function updateText() {
     let playing = "playing: " + currentlyPlaying
     let baseInfo = "key: " + AllNotes[key] + "\noctave: " + octave
-    let chordMode = controller.getStickSection(0, 1, 8, gpIndex)
-    let chordIndex = controller.getStickSection(2, 3, 8, gpIndex)
+    let chordMode = getOctant(0)
+    let chordIndex = getOctant(1)
     noStroke()
     fill(0)
     noteText = playing + "\nselected: " + getChordText(chordIndex, chordMode) + "\n" + baseInfo + "\nplay mode: " + PLAYMODES[playModeIndex] + "\n " + TEMPOS[tempoIndex] + " bpm\n"
