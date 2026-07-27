@@ -103,10 +103,10 @@ function trigger() {
     // playChord(0, 0)
     let chordMode = controller.getOctant(0)-1
     let chordIndex = controller.getOctant(1)-1
-    gotit = `i got: ${chordTypeDict[chordIndex]}, ${chordModeDict[chordMode]}`
+    gotit = `i got: ${chordIndex}, ${chordMode}`
     debugDraw();
     currentlyPlaying = getChordText(chordIndex, chordMode)
-    cChordNoteIndex = 0
+    // cChordNoteIndex = 0
     if (chordIndex == -1) {
         unPressAll()
         beatTriggered.length = 0
