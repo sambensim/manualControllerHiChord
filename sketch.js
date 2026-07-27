@@ -21,6 +21,9 @@ function draw() {
 let gotit = ""
 function debugDraw() {
     background(255);
+    if (gotit == "") {
+        gotit = "waiting"
+    }
     text(gotit, windowWidth/2, windowHeight/2);
 }
 

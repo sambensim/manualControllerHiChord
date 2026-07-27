@@ -98,7 +98,7 @@ function trigger() {
     // playChord(0, 0)
     let chordMode = controller.getOctant(0)-1
     let chordIndex = controller.getOctant(1)-1
-    gotit = `${chordTypeDict[chordIndex]}, ${chordModeDict[chordMode]}`
+    gotit = `i got: ${chordTypeDict[chordIndex]}, ${chordModeDict[chordMode]}`
     debugDraw();
     currentlyPlaying = getChordText(chordIndex, chordMode)
     cChordNoteIndex = 0
