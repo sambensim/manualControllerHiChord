@@ -38,11 +38,11 @@ function on_classic({data}) {
     let {type, player, button, pressed} = data
     if (type === "button") {
         joystickState[player - 1][button.toLowerCase()] = pressed 
-        gotit = JSON.stringify(data);
-        gotit += "\n" + JSON.stringify(joystickState)
-        debugDraw()
+        // gotit = JSON.stringify(data);
+        // gotit += "\n" + JSON.stringify(joystickState)
+        // debugDraw()
+        tryUpdate()
     }
-    tryUpdate()
 }
 
 function getOctant(player) {
@@ -74,7 +74,7 @@ function getOctant(player) {
 
 function tryUpdate() {
     trigger()
-    updateText(index)
+    updateText()
 }
 
 function mainLoop() {
