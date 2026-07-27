@@ -1,7 +1,10 @@
 let recentDown = []
 let recentUp = []
 
+let ready = false
+
 function setup() {
+    ready = true
   createCanvas(windowWidth, windowHeight);
 }
 
@@ -25,13 +28,15 @@ function debugDraw() {
 let noteText = ""
 let currentlyPlaying = "none"
 function updateText() {
-    let playing = "playing: " + currentlyPlaying
-    let baseInfo = "key: " + AllNotes[key] + "\noctave: " + octave
-    let chordMode = getOctant(0)
-    let chordIndex = getOctant(1)
-    noStroke()
-    fill(0)
-    noteText = playing + "\nselected: " + getChordText(chordIndex, chordMode) + "\n" + baseInfo + "\nplay mode: " + PLAYMODES[playModeIndex] + "\n " + TEMPOS[tempoIndex] + " bpm\n"
+    if (ready) {
+        let playing = "playing: " + currentlyPlaying
+        let baseInfo = "key: " + AllNotes[key] + "\noctave: " + octave
+        let chordMode = getOctant(0)
+        let chordIndex = getOctant(1)
+        noStroke()
+        fill(0)
+        noteText = playing + "\nselected: " + getChordText(chordIndex, chordMode) + "\n" + baseInfo + "\nplay mode: " + PLAYMODES[playModeIndex] + "\n " + TEMPOS[tempoIndex] + " bpm\n"
+    }
 }
 
 function getChordText(chordIndex, chordMode) {
