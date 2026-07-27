@@ -24,7 +24,7 @@ function debugDraw() {
     if (gotit == "") {
         gotit = "waiting"
     }
-    text(gotit, windowWidth/2, windowHeight/2);
+    text(gotit, 0, windowHeight/2);
 }
 
 let noteText = ""
