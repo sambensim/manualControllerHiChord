@@ -28,15 +28,16 @@ let initialState = {
 
 let joystickState = [{...initialState}, {...initialState}]
 
-window.RCadeInput.register_classic(on_classic)
+window.RCadeInput.register_classic(on_classic).then(() => {
 startAudio()
+playChord(0, 0)
 
 function on_classic({data}) {
     let {type, player, button, pressed} = data
-    if (type == "button") {
+    if (type === "button") {
         joystickState[player - 1][button] = pressed
-        tryUpdate()
     }
+    tryUpdate()
 }
 
 function getOctant(player) {
@@ -67,7 +68,6 @@ function getOctant(player) {
 }
 
 function tryUpdate() {
-    debugDraw()
     trigger()
     updateText(index)
 }
@@ -239,3 +239,4 @@ async function startAudio() {
 }
 // window.addEventListener("pointerdown", startAudio, { once: true });
 // window.addEventListener("keydown", startAudio, { once: true });
+});
