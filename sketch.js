@@ -20,7 +20,9 @@ function updateText(gpIndex) {
     let baseInfo = "key: " + AllNotes[key] + "\noctave: " + octave
     let chordMode = controller.getStickSection(0, 1, 8, gpIndex)
     let chordIndex = controller.getStickSection(2, 3, 8, gpIndex)
-    noteText = playing + "\nselected: " + getChordText(chordIndex, chordMode) + "\n" + baseInfo
+    noStroke()
+    fill(0)
+    noteText = playing + "\nselected: " + getChordText(chordIndex, chordMode) + "\n" + baseInfo + "\nplay mode: " + PLAYMODES[playModeIndex] + "\n " + TEMPOS[tempoIndex] + " bpm\n"
 }
 
 function getChordText(chordIndex, chordMode) {
@@ -49,6 +51,26 @@ function pianoroll() {
         recentDown.shift()
         recentUp.shift()
     }
+}
+
+const JOYSTICKDIST = 25
+function joysticks() {
+    let centerx = width/3
+    let centery = height/3*2
+    let x1 = JOYSTICKDIST*controller.getAxisValue(0, CONTROLLERINDEX)+centerx
+    let y1 = JOYSTICKDIST*controller.getAxisValue(1, CONTROLLERINDEX)+centery
+    noFill()
+    stroke(0)
+    circle(centerx, centery, 60)
+    line(centerx, centery, x1, y1)
+    centerx = width/3*2
+    let x2 = JOYSTICKDIST*controller.getAxisValue(2, CONTROLLERINDEX)+centerx
+    let y2 = JOYSTICKDIST*controller.getAxisValue(3, CONTROLLERINDEX)+centery
+    circle(centerx, centery,60)
+    line(centerx, centery, x2, y2)
+    fill(0, 0, 255)
+    circle(x1, y1, 10)
+    circle(x2, y2, 10)
 }
 
 function windowResized(){
