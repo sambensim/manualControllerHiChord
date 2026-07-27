@@ -73,12 +73,12 @@ function tryUpdate() {
 }
 
 function mainLoop() {
-    const leftTrigger = controller.getButtonValue(6, CONTROLLERINDEX) || 0;
-    const rightTrigger = controller.getButtonValue(7, CONTROLLERINDEX) || 0;
-    if (filter) {
-        filter.frequency.rampTo(Math.max(2400 - 2000 * leftTrigger, 1e-4), 0.05);
-        vibrato.depth.rampTo(Math.max(0.5 * rightTrigger, 1e-4), 0.05);
-    }
+    // const leftTrigger = controller.getButtonValue(6, CONTROLLERINDEX) || 0;
+    // const rightTrigger = controller.getButtonValue(7, CONTROLLERINDEX) || 0;
+    // if (filter) {
+        // filter.frequency.rampTo(Math.max(2400 - 2000 * leftTrigger, 1e-4), 0.05);
+        // vibrato.depth.rampTo(Math.max(0.5 * rightTrigger, 1e-4), 0.05);
+    // }
     requestAnimationFrame(mainLoop);
 }
 
@@ -233,7 +233,7 @@ async function startAudio() {
   createSynth();
   changeKey(0)
   console.log("Audio context started");
-  updateText(index)
+  updateText()
 }
 // window.addEventListener("pointerdown", startAudio, { once: true });
 // window.addEventListener("keydown", startAudio, { once: true });
