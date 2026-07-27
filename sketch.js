@@ -15,12 +15,12 @@ function draw() {
     background(255)
     text("okokokok", width/2, height/10)
     text(noteText, 50, 50);
-    debugDraw()
+    debugDraw();
 }
 
 let gotit = ""
 function debugDraw() {
-    background(255)
+    background(255);
     text(gotit, windowWidth/2, windowHeight/2);
 }
 
