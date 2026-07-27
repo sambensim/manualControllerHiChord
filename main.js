@@ -29,6 +29,8 @@ let initialState = {
 let joystickState = [{...initialState}, {...initialState}]
 
 window.RCadeInput.register_classic(on_classic)
+startAudio()
+
 function on_classic({data}) {
     let {type, player, button, pressed} = data
     if (type == "button") {
@@ -231,5 +233,5 @@ async function startAudio() {
   console.log("Audio context started");
   updateText(index)
 }
-window.addEventListener("pointerdown", startAudio, { once: true });
-window.addEventListener("keydown", startAudio, { once: true });
+// window.addEventListener("pointerdown", startAudio, { once: true });
+// window.addEventListener("keydown", startAudio, { once: true });
