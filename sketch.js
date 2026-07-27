@@ -18,12 +18,10 @@ function draw() {
     debugDraw()
 }
 
-let gotit = false
+let gotit = ""
 function debugDraw() {
     background(255)
-    if (gotit) {
-        text("OK I GOT IT", windowWidth/2, windowHeight/2);
-    }
+    text(gotit, windowWidth/2, windowHeight/2);
 }
 
 let noteText = ""
