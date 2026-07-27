@@ -77,15 +77,15 @@ function tryUpdate() {
     updateText()
 }
 
-function mainLoop() {
-    // const leftTrigger = controller.getButtonValue(6, CONTROLLERINDEX) || 0;
-    // const rightTrigger = controller.getButtonValue(7, CONTROLLERINDEX) || 0;
-    // if (filter) {
-        // filter.frequency.rampTo(Math.max(2400 - 2000 * leftTrigger, 1e-4), 0.05);
-        // vibrato.depth.rampTo(Math.max(0.5 * rightTrigger, 1e-4), 0.05);
-    // }
-    requestAnimationFrame(mainLoop);
-}
+// function mainLoop() {
+//     // const leftTrigger = controller.getButtonValue(6, CONTROLLERINDEX) || 0;
+//     // const rightTrigger = controller.getButtonValue(7, CONTROLLERINDEX) || 0;
+//     // if (filter) {
+//         // filter.frequency.rampTo(Math.max(2400 - 2000 * leftTrigger, 1e-4), 0.05);
+//         // vibrato.depth.rampTo(Math.max(0.5 * rightTrigger, 1e-4), 0.05);
+//     // }
+//     requestAnimationFrame(mainLoop);
+// }
 
 let beatTriggered = []
 function beat() {
@@ -101,8 +101,8 @@ function beat() {
 
 function trigger() {
     // playChord(0, 0)
-    let chordMode = controller.getOctant(0)-1
-    let chordIndex = controller.getOctant(1)-1
+    let chordMode = getOctant(0)-1
+    let chordIndex = getOctant(1)-1
     gotit = `i got: ${chordIndex}, ${chordMode}`
     debugDraw();
     currentlyPlaying = getChordText(chordIndex, chordMode)
@@ -117,7 +117,7 @@ function trigger() {
 
 
 beat()
-requestAnimationFrame(mainLoop);
+// requestAnimationFrame(mainLoop);
 
 
 // const controller = new GamepadController({
